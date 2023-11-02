@@ -27,6 +27,7 @@ namespace JocPeces
         private int nColumnes;
         private int numCorrectes;
         private double progres;
+        private int[] posicionsRandoms;
         Fitxa[,] matriuFitxes;
         Fitxa buida;
         DispatcherTimer rellotge;
@@ -54,15 +55,12 @@ namespace JocPeces
 
         private void CreaGraella()
         {
-           
-            gridJoc.ShowGridLines = true;
-
             gridJoc.CreaFiles(nFiles);
             gridJoc.CreaColumnes(nColumnes);
 
-            PosaFitxes(ArrayRandom());
+            posicionsRandoms = ArrayRandom();
 
-            
+            PosaFitxes(posicionsRandoms);
         }
 
         #endregion
@@ -119,6 +117,8 @@ namespace JocPeces
                 for (int j = 0; j < nColumnes; j++)
                 {
                     Fitxa fitxa = new Fitxa();
+
+                    fitxa.BorderThickness = new Thickness(2);
 
                     fitxa.Click += Fitxa_Click;
 
@@ -295,6 +295,87 @@ namespace JocPeces
             sbiText.Content = cadena;
         }
 
+        #endregion
+
+        #region Key
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.P || e.Key == Key.Escape)
+            {
+                rellotge.Stop();
+
+                WPFPausa WNDPausa = new WPFPausa();
+                WNDPausa.Owner = this;
+                this.Hide();
+                bool? reiniciar = WNDPausa.ShowDialog();
+                this.Show();
+                if (reiniciar == true)
+                {
+                    ReiniciarGrid(posicionsRandoms);
+                    IniciarRellotge();
+                }
+                else rellotge.Start();
+            }
+        }
+
+        #endregion
+
+        #region Reiniciar
+        private void ReiniciarGrid(int[] posicions)
+        {
+            numCorrectes = 0;
+            gridJoc.Children.Clear();
+
+            int n = 0;
+
+            for (int i = 0; i < nFiles; i++)
+            {
+                for (int j = 0; j < nColumnes; j++)
+                {
+                    Fitxa fitxa = new Fitxa();
+
+                    fitxa.BorderThickness = new Thickness(2);
+
+                    fitxa.Click += Fitxa_Click;
+
+                    fitxa.NumActual = n + 1;
+                    if ((nFiles * nColumnes) != n + 1)
+                    {
+                        fitxa.NumObjectiu = posicions[n];
+                        fitxa.Content = posicions[n];
+                    }
+                    else
+                    {
+                        fitxa.NumObjectiu = -1;
+                        fitxa.Content = -1;
+                    }
+
+
+                    PintaFitxa(fitxa);
+
+
+                    fitxa.posFila = i;
+                    fitxa.posColumna = j;
+
+                    fitxa.SetValue(Grid.RowProperty, i);
+                    fitxa.SetValue(Grid.ColumnProperty, j);
+
+                    gridJoc.Children.Add(fitxa);
+
+                    matriuFitxes[i, j] = fitxa;
+
+                    n++;
+
+                }
+            }
+
+            buida = matriuFitxes[matriuFitxes.GetLength(0) - 1, matriuFitxes.GetLength(1) - 1];
+            buida.Visibility = Visibility.Collapsed;
+            numCorrectes = Puntua();
+            sbiNCorrectes.Content = numCorrectes;
+            sbiPercentatgeCompletat.Content = Math.Round((double)numCorrectes / (nFiles * nColumnes - 1) * 100, 2) + " %";
+        }
         #endregion
 
         #region Acabar

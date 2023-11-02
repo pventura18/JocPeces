@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JocPeces"
         mc:Ignorable="d"
-        Title="WPFJoc" Height="450" Width="800">
+        Title="WPFJoc" Height="450" Width="800" FontSize="30" KeyDown="Window_KeyDown">
     <DockPanel x:Name="dpDockPanel">
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>Temps transcorregut:</StatusBarItem>
@@ -17,6 +17,9 @@
             <StatusBarItem>Número de peces correctes:</StatusBarItem>
             <StatusBarItem x:Name="sbiNCorrectes"></StatusBarItem>
         </StatusBar>
+        
         <Grid x:Name="gridJoc"/>
+        
+        
     </DockPanel>
 </Window>

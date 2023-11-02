@@ -1,0 +1,20 @@
+﻿<Window x:Class="JocPeces.WPFPausa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JocPeces"
+        mc:Ignorable="d"
+        Title="WPFPausa" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Content="Continuar" x:Name="btnContinuar" Click="btnContinuar_Click" Margin="30" Background="White" FontSize="30"/>
+        <Button Grid.Row="1" Content="Reiniciar" x:Name="btnReiniciar" Click="btnReiniciar_Click" Margin="30" Background="White" FontSize="30"/>
+        <Button Grid.Row="2" Content="Pantalla principal" x:Name="btnPantallaPrincipal" Click="btnPantallaPrincipal_Click" Margin="30" Background="White" FontSize="30"/>
+    </Grid>
+</Window>

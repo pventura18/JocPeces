@@ -6,15 +6,25 @@
         xmlns:local="clr-namespace:JocPeces" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Pantalla Previa" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        
-        <xctk:IntegerUpDown Grid.Row="0" Name="iudFiles" Minimum="0" />
-        <xctk:IntegerUpDown Grid.Row="1" Name="iudColumnes" Minimum="0"/>
-        <Button Content="Comença" Grid.Row="2" Click="Button_Click"/>
-    </Grid>
+    <DockPanel Background="Black">
+        <TextBlock Text="EL PUZZLE" DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="70" Foreground="White"/>
+        <Grid Background="White" Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <Label Content="Files" DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center"/>
+                <xctk:IntegerUpDown  Name="iudFiles" Minimum="0" DockPanel.Dock="Top" Margin="10,0,10,0" TextAlignment="Center" FontSize="20"/>
+            </DockPanel>
+            <DockPanel Grid.Row="1">
+                <Label Content="Columnes" DockPanel.Dock="Top" FontSize="20" HorizontalAlignment="Center"/>
+                <xctk:IntegerUpDown  Name="iudColumnes" Minimum="0" DockPanel.Dock="Top" Margin="10,0,10,0" TextAlignment="Center" FontSize="20"/>
+            </DockPanel>
+
+            <Button Content="Comença" Grid.Row="2" Click="Button_Click" Margin="10" FontSize="30" FontWeight="Bold"/>
+        </Grid>
+    </DockPanel>
+    
 </Window>

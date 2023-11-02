@@ -28,8 +28,11 @@ namespace JocPeces
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            WPFJoc joc = new WPFJoc((int)iudFiles.Value, (int)iudColumnes.Value);
-            joc.ShowDialog();
+            if(iudFiles.Value != null && iudColumnes.Value != null && (int)iudFiles.Value > 1 && (int)iudColumnes.Value > 1)
+            {
+                WPFJoc joc = new WPFJoc((int)iudFiles.Value, (int)iudColumnes.Value);
+                joc.ShowDialog();
+            }
         }
     }
 }

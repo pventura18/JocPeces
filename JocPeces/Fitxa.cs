@@ -14,11 +14,5 @@ namespace JocPeces
         public int posFila { get; set; }
         public int posColumna { get; set; }
 
-        public bool esCorrecte { get; set; }
-
-        public Fitxa()
-        {
-            esCorrecte = false;
-        }
     }
 }
